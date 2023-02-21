@@ -106,7 +106,7 @@ public class App {
         {
            // WordFrequency countWord = wordCounter.get(key);
             WordFrequency countWord;
-            //countWord.count
+            countWord.count = wordCounter.get(key);
             WordList.add(countWord);
         }
     
