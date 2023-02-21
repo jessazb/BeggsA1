@@ -96,7 +96,22 @@ public class App {
         for(String keyWord: wordCounter.keySet()){
             System.out.println(keyWord + ": " + wordCounter.get(keyWord));
         }
+
+    // Step 9. Based on the sample code given in Lab 6,
+    // add code to the App class to create an ArrayList of WordFrequency
+    // objects.Populate the ArrayList with the data stored
+    // in the HashMap created in Step 5.
+        ArrayList<WordFrequency> WordList = new ArrayList<>();
+        for (String key: wordCounter.keySet())
+        {
+           // WordFrequency countWord = wordCounter.get(key);
+            WordFrequency countWord;
+            //countWord.count
+            WordList.add(countWord);
+        }
+    
     }
+
 
 
 }
