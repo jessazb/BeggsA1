@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class App {
@@ -13,6 +14,24 @@ public class App {
         ArrayList<String> words = readWords("res/words.txt"); //Step 4
         HashMap<String, Integer> wordCounter = buildHashMap(words); //Step 5
         createHTMLfile(wordCounter);
+
+        // Step 9. Based on the sample code given in Lab 6,
+        // add code to the App class to create an ArrayList of WordFrequency
+        // objects.Populate the ArrayList with the data stored
+        // in the HashMap created in Step 5.
+
+        // Converts the hashmap back into an array
+        ArrayList<WordFrequency> WordList = new ArrayList<>();
+        for (String key: wordCounter.keySet())
+        {
+            WordFrequency countWord = new WordFrequency(key, wordCounter.get(key));
+            WordList.add(countWord);
+        }
+        Collections.sort(WordList);
+
+        //Calls the function createSortedfile
+        createSortedfile(WordList);
+        System.out.println(WordList);
     }
 
     //Step 4 - Read Input File
@@ -96,23 +115,32 @@ public class App {
         for(String keyWord: wordCounter.keySet()){
             System.out.println(keyWord + ": " + wordCounter.get(keyWord));
         }
-
-    // Step 9. Based on the sample code given in Lab 6,
-    // add code to the App class to create an ArrayList of WordFrequency
-    // objects.Populate the ArrayList with the data stored
-    // in the HashMap created in Step 5.
-        ArrayList<WordFrequency> WordList = new ArrayList<>();
-        for (String key: wordCounter.keySet())
-        {
-           // WordFrequency countWord = wordCounter.get(key);
-            WordFrequency countWord;
-            countWord.count = wordCounter.get(key);
-            WordList.add(countWord);
-        }
     
     }
 
-
+        // step 10 - creating the html file using a for loop to input data
+        private static void createSortedfile(ArrayList<WordFrequency> wordCounter) {
+            File file = new File("res/sorted.html");
+    
+            try {
+                FileWriter FileWriter = new FileWriter(file);
+                StringBuilder builder = new StringBuilder();
+                builder.append("<h1>Word Count</h1>");
+    
+                builder.append("<table border = 1>");
+                for(WordFrequency key: wordCounter){
+                    builder.append("<tr>");
+                    builder.append("<td>" + key.getWord() + "</td>");
+                    builder.append("<td>" + key.getCount() + "</td>");
+                    builder.append("</tr>");
+                }
+                builder.append("</table>");
+                FileWriter.append(builder.toString());
+                FileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
 }
 
